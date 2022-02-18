@@ -1,0 +1,21 @@
+#!/bin/bash -l
+#SBATCH --account=lab_kim
+#SBATCH --partition=gpu
+#SBATCH --job-name=GPU_nNos_AI
+#SBATCH --mail-user=uwc5003@psu.edu
+#SBATCH --mail-type=FAIL,END
+#SBATCH --output=GPU_XXX.%j.out
+#SBATCH --error=GPU_XXX.%j.err
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=22
+#SBATCH --gres=gpu:1
+#SBATCH --mem=150000
+#SBATCH --time=100000:00:00
+
+
+module load matlab
+module load tensorflow
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/projects/KimLab/pipeline/usr/local/elastix/lib/
+matlab -nodisplay -batch c 
